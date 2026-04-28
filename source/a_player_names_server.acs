@@ -45,6 +45,10 @@ SCRIPT SC_SPOT_ACTOR_SERVER (void) NET
 	// If aproved to use, block it for a second.
 	SpotNextAllowed[p] = now + TICRATE;
 
+	// [IRX] Don't allow spotting while purchasing a mech (player is frozen in hangar)
+	if (GettingMech[PlayerTeam()])
+		terminate;
+
 	int tid = ActivatorTID();
 	SetActivator(tid);
 	
